@@ -2454,7 +2454,7 @@ function controlRequiresInference(family, field, tier, kernel) {
   
   // Check if kernel lacks required evidence
   if (field === 'event_sequencing_structure') {
-    const events = kernel?.events || [];
+    const events = Array.isArray(kernel?.events) ? kernel.events : (kernel?.events ? [kernel.events] : []);
     return events.filter(e => e.tag === 'FOUND').length < 2;
   }
   if (field === 'change_logic') {
@@ -2534,7 +2534,7 @@ function computeKernelScore(kernel) {
   let turnDelta = 0; // 0-2
   
   // Eventness: weight FOUND=1.0, INFERRED=0.5
-  const events = kernel.events || [];
+  const events = Array.isArray(kernel.events) ? kernel.events : (kernel.events ? [kernel.events] : []);
   let eventScore = 0;
   events.forEach(e => {
     if (e.tag === 'FOUND') eventScore += 1.0;
@@ -2724,7 +2724,7 @@ const ConstraintEngine = {
     
     // IG2: Causal link missing - suppress if events are sufficient (including INFERRED)
     if (stack?.family_1_identity?.event_sequencing_structure === 'ESCALATION') {
-      const events = kernel?.events || [];
+      const events = Array.isArray(kernel?.events) ? kernel.events : (kernel?.events ? [kernel.events] : []);
       const validEvents = events.filter(e => e.tag === 'FOUND' || e.tag === 'INFERRED');
       if (validEvents.length < 2) {
         gates.push({
@@ -2783,8 +2783,10 @@ function generateRendition(kernel, stack, truth) {
   if (kernel.pressure?.tag === 'FOUND') preservedFacts.push(`Pressure: ${kernel.pressure.content}`);
   if (kernel.stakes?.tag === 'FOUND') preservedFacts.push(`Stakes: ${kernel.stakes.content}`);
   if (kernel.turn_or_delta?.tag === 'FOUND') preservedFacts.push(`Turn: ${kernel.turn_or_delta.content}`);
-  (kernel.events || []).forEach(e => {
-    if (e.tag === 'FOUND') preservedFacts.push(`Event ${e.order}: ${e.content}`);
+  // Handle events as array or object
+  const eventsArray = Array.isArray(kernel.events) ? kernel.events : (kernel.events ? [kernel.events] : []);
+  eventsArray.forEach(e => {
+    if (e.tag === 'FOUND') preservedFacts.push(`Event ${e.order || 1}: ${e.content}`);
   });
   
   // Collect inferred additions
@@ -2794,8 +2796,8 @@ function generateRendition(kernel, stack, truth) {
   if (kernel.pressure?.tag === 'INFERRED') inferredAdditions.push(`Pressure: ${kernel.pressure.content}`);
   if (kernel.stakes?.tag === 'INFERRED') inferredAdditions.push(`Stakes: ${kernel.stakes.content}`);
   if (kernel.turn_or_delta?.tag === 'INFERRED') inferredAdditions.push(`Turn: ${kernel.turn_or_delta.content}`);
-  (kernel.events || []).forEach(e => {
-    if (e.tag === 'INFERRED') inferredAdditions.push(`Event ${e.order}: ${e.content}`);
+  eventsArray.forEach(e => {
+    if (e.tag === 'INFERRED') inferredAdditions.push(`Event ${e.order || 1}: ${e.content}`);
   });
   
   // Generate narrative summary based on stack configuration
@@ -3622,9 +3624,9 @@ function renderDiagnosisView(s, storyId) {
           <div class="kernel-item full">
             <div class="kernel-label">SEQUENCE</div>
             <ul class="events-list">
-              ${(kernel?.events || []).map(e => `
+              ${(Array.isArray(kernel?.events) ? kernel.events : (kernel?.events ? [kernel.events] : [])).map(e => `
                 <li>
-                  <span class="event-order">${e.order}.</span>
+                  <span class="event-order">${e.order || 1}.</span>
                   <span>${esc(e.content)}</span>
                   ${tag(e.tag)}
                 </li>
@@ -3880,9 +3882,9 @@ function renderStory(s, idx) {
           <div class="kernel-item full">
             <div class="kernel-label">Events</div>
             <ul class="events-list">
-              ${(kernel?.events || []).map(e => `
+              ${(Array.isArray(kernel?.events) ? kernel.events : (kernel?.events ? [kernel.events] : [])).map(e => `
                 <li>
-                  <span class="event-order">${e.order}.</span>
+                  <span class="event-order">${e.order || 1}.</span>
                   <span>${esc(e.content)}</span>
                   ${tag(e.tag)}
                 </li>
@@ -4510,9 +4512,9 @@ function updateKernelDisplay(storyId, kernel) {
     <div class="kernel-item full">
       <div class="kernel-label">Events</div>
       <ul class="events-list">
-        ${(kernel?.events || []).map(e => `
+        ${(Array.isArray(kernel?.events) ? kernel.events : (kernel?.events ? [kernel.events] : [])).map(e => `
           <li>
-            <span class="event-order">${e.order}.</span>
+            <span class="event-order">${e.order || 1}.</span>
             <span>${esc(e.content)}</span>
             ${tag(e.tag)}
           </li>
