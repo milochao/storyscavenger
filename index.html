@@ -2387,6 +2387,34 @@ function esc(s) {
 }
 
 // ============================================================================
+// HELPER: Normalize assessment format (handles both object and string formats)
+// ============================================================================
+function normalizeAssessment(assess) {
+  if (!assess) return {};
+  
+  const normalize = (val) => {
+    if (typeof val === 'object' && val !== null && 'score' in val) {
+      return val; // Already correct format
+    }
+    if (typeof val === 'string') {
+      return { score: 7, reason: val }; // String format - use default score
+    }
+    if (typeof val === 'number') {
+      return { score: val, reason: '' };
+    }
+    return { score: 0, reason: '' };
+  };
+  
+  return {
+    kernel_score: assess.kernel_score || 0,
+    playability_tier: assess.playability_tier || 'UNPLAYABLE',
+    fit: normalize(assess.fit),
+    earned_emotion: normalize(assess.earned_emotion),
+    pattern_strength: normalize(assess.pattern_strength)
+  };
+}
+
+// ============================================================================
 // CONSTANTS: MECE Dropdown Options
 // ============================================================================
 const STACK_OPTIONS = {
@@ -3402,7 +3430,7 @@ function showSelectionSection(intake, stories) {
 function renderSelectionCard(s, idx) {
   const meta = s.story_metadata || {};
   const raw = s.raw_content || {};
-  const assess = s.assessments || {};
+  const assess = normalizeAssessment(s.assessments);
   const storyId = s.story_id || `story_${idx}`;
   const tier = assess.playability_tier || 'UNPLAYABLE';
   
@@ -3517,7 +3545,7 @@ function renderResults(intake, stories) {
 function renderStoryTabs(stories) {
   let tabsHtml = '';
   stories.forEach((s, i) => {
-    const assess = s.assessments || {};
+    const assess = normalizeAssessment(s.assessments);
     const tier = assess.playability_tier || 'UNPLAYABLE';
     const raw = s.raw_content || {};
     const shortQuote = (raw.key_quote || 'Story').substring(0, 25) + (raw.key_quote?.length > 25 ? '...' : '');
@@ -3571,7 +3599,7 @@ function renderDiagnosisView(s, storyId) {
   const meta = s.story_metadata || {};
   const raw = s.raw_content || {};
   const kernel = kernelByStoryId[storyId];
-  const assess = s.assessments || {};
+  const assess = normalizeAssessment(s.assessments);
   
   const tag = (t) => `<span class="tag ${(t||'').toLowerCase()}">${t === 'FOUND' ? 'FOUND' : t === 'INFERRED' ? 'INFERRED' : '?'}</span>`;
   const scoreClass = (n) => n >= 7 ? 'high' : n >= 4 ? 'mid' : 'low';
@@ -3813,7 +3841,7 @@ function renderStory(s, idx) {
   const meta = s.story_metadata || {};
   const raw = s.raw_content || {};
   const kernel = s.kernel || migrateDiagnosticToKernel(s.diagnostic_analysis);
-  const assess = s.assessments || {};
+  const assess = normalizeAssessment(s.assessments);
   const stack = s.default_stack || {};
   const storyId = s.story_id || `story_${idx}`;
   
@@ -4896,7 +4924,25 @@ OUTPUT FORMAT:
 Return ONLY the polished story. No preamble, no explanation, no "Here's the edited version."`;
 
 function formatFinalOutput(result) {
-  const story = result.story || result.edited || result.final || '';
+  // Handle various response formats
+  let story = '';
+  
+  if (typeof result === 'string') {
+    story = result;
+  } else if (result) {
+    story = result.final || result.story || result.edited || result.draft || '';
+  }
+  
+  // If story still looks like JSON, try to extract
+  if (story.startsWith('{') || story.startsWith('[')) {
+    try {
+      const parsed = JSON.parse(story);
+      story = parsed.final || parsed.story || parsed.draft || parsed.text || story;
+    } catch (e) {}
+  }
+  
+  if (!story) return '<div style="color:#dc2626;">No story generated</div>';
+  
   return `<div style="font-size:15px;line-height:1.8;color:#1e293b;">${esc(story).split('\n\n').map(p => `<p style="margin-bottom:1em;">${p}</p>`).join('')}</div>`;
 }
 
