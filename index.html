@@ -4,16 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>STORYBOX</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
+    :root {
+      --cream: #f5f0e6;
+      --cream-dark: #ebe5d9;
+      --black: #1a1a1a;
+      --red: #d64933;
+      --blue: #2d4a8c;
+      --amber: #d4a03c;
+      --gray: #8a8577;
+    }
+    
     body {
-      font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
-      background: #f5f5f5;
-      color: #1a1a1a;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--cream);
+      color: var(--black);
       min-height: 100vh;
       line-height: 1.6;
-      font-size: 13px;
+      font-size: 14px;
     }
     
     .container {
@@ -25,26 +36,27 @@
     header {
       margin-bottom: 32px;
       padding-bottom: 16px;
-      border-bottom: 2px solid #1a1a1a;
+      border-bottom: 2px solid var(--black);
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
     
     .logo {
-      font-size: 14px;
-      letter-spacing: 0.15em;
+      font-size: 12px;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
+      font-weight: 700;
     }
     
-    .logo span:first-child { font-weight: 300; opacity: 0.4; }
+    .logo span:first-child { font-weight: 400; opacity: 0.5; }
     .logo span:last-child { font-weight: 700; }
     
     .system-id {
-      font-size: 9px;
+      font-size: 10px;
       text-transform: uppercase;
       letter-spacing: 0.15em;
-      color: #666;
+      color: var(--gray);
       background: transparent;
       padding: 5px 0;
       border: none;
@@ -54,97 +66,91 @@
       font-size: 18px;
       font-weight: 700;
       margin-bottom: 6px;
-      color: #1a1a1a;
+      color: var(--black);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
     }
     
     h2 {
       font-size: 14px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
     }
     
     .subtitle {
-      font-size: 12px;
-      color: #666;
+      font-size: 13px;
+      color: var(--gray);
     }
     
     .principle {
       margin-top: 16px;
       padding: 12px;
-      background: transparent;
-      border: 1px solid #ccc;
-      font-size: 11px;
-      color: #666;
+      background: var(--cream-dark);
+      border: none;
+      font-size: 12px;
+      color: var(--gray);
     }
     
     .principle code {
-      color: #1a1a1a;
+      color: var(--black);
       font-family: inherit;
+      font-weight: 600;
     }
     
-    /* Bento Box Form */
+    /* Bento Box Form - Bauhaus */
     .bento-form {
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: auto auto auto auto;
-      gap: 12px;
-      margin-top: 32px;
+      gap: 3px;
+      background: var(--black);
+      padding: 3px;
+      margin-top: 24px;
     }
     
     .bento-cell {
-      background: #ffffff;
-      border: 1px solid #1a1a1a;
-      padding: 16px;
+      background: var(--cream);
+      border: none;
+      padding: 20px;
       position: relative;
-      transition: background 0.1s;
+      transition: background 0.15s;
     }
     
     .bento-cell:hover {
-      background: #fafafa;
+      background: var(--cream-dark);
     }
     
     .bento-cell:focus-within {
-      border-color: #1a1a1a;
-      border-width: 2px;
-      box-shadow: none;
+      background: #fff;
     }
     
     .bento-cell.truth {
       grid-column: 1 / -1;
-      background: #fff;
-      border-color: #1a1a1a;
-      border-width: 2px;
+      background: var(--cream);
     }
     
     .bento-cell.truth:focus-within {
-      border-color: #1a1a1a;
-      box-shadow: none;
+      background: #fff;
     }
     
     .bento-cell.emotion {
       grid-column: 1 / -1;
-      background: #fff;
-      border-color: #1a1a1a;
+      background: var(--cream);
     }
     
     .bento-cell.emotion:focus-within {
-      border-color: #1a1a1a;
-      box-shadow: none;
+      background: #fff;
     }
     
     .bento-cell.submit-cell {
       grid-column: 1 / -1;
-      background: transparent;
-      border: none;
+      background: var(--black);
       padding: 0;
     }
     
-    .bento-cell.submit-cell:hover,
-    .bento-cell.submit-cell:focus-within {
-      box-shadow: none;
+    .bento-cell.submit-cell:hover {
+      background: var(--black);
     }
     
     .bento-label {
@@ -152,27 +158,27 @@
       align-items: center;
       gap: 8px;
       font-size: 10px;
-      font-weight: 700;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: #1a1a1a;
+      letter-spacing: 0.12em;
+      color: var(--gray);
       margin-bottom: 10px;
     }
     
     .bento-label .cell-icon {
       font-size: 10px;
-      opacity: 0.5;
+      color: var(--amber);
     }
     
     .bento-label .required {
-      color: #1a1a1a;
-      font-size: 8px;
-      font-weight: 400;
+      color: var(--red);
+      font-size: 10px;
+      font-weight: 600;
     }
     
     .bento-label .optional {
-      color: #999;
-      font-size: 9px;
+      color: var(--gray);
+      font-size: 10px;
       font-weight: 400;
       text-transform: none;
       letter-spacing: normal;
@@ -183,14 +189,14 @@
       background: transparent;
       border: none;
       padding: 0;
-      color: #1a1a1a;
-      font-size: 14px;
+      color: var(--black);
+      font-size: 16px;
       font-family: inherit;
       line-height: 1.5;
     }
     
     .bento-input::placeholder {
-      color: #999;
+      color: var(--gray);
       font-style: normal;
     }
     
@@ -203,8 +209,8 @@
       background: transparent;
       border: none;
       padding: 0;
-      color: #0f172a;
-      font-size: 16px;
+      color: var(--black);
+      font-size: 18px;
       font-family: inherit;
       line-height: 1.6;
       resize: none;
@@ -212,8 +218,8 @@
     }
     
     .bento-textarea::placeholder {
-      color: #cbd5e1;
-      font-style: italic;
+      color: var(--gray);
+      font-style: normal;
     }
     
     .bento-textarea:focus {
@@ -221,27 +227,27 @@
     }
     
     .bento-helper {
-      font-size: 10px;
-      color: #999;
-      margin-top: 8px;
+      font-size: 11px;
+      color: var(--gray);
+      margin-top: 10px;
       line-height: 1.4;
     }
     
     .bento-cell.truth .bento-helper {
-      color: #666;
+      color: var(--gray);
     }
     
     .bento-cell.emotion .bento-helper {
-      color: #666;
+      color: var(--gray);
     }
     
     .halt-warning {
-      background: #fff;
-      border: 1px solid #1a1a1a;
+      background: var(--amber);
+      border: none;
       padding: 10px 12px;
       font-size: 11px;
-      color: #1a1a1a;
-      margin-top: 8px;
+      color: #5c4a1f;
+      margin-top: 10px;
       display: none;
     }
     
@@ -257,39 +263,40 @@
     .phase-label {
       font-size: 9px;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: #666;
+      letter-spacing: 0.12em;
+      color: var(--gray);
       margin-bottom: 6px;
     }
     
     label {
       display: block;
-      font-size: 12px;
-      font-weight: 700;
+      font-size: 11px;
+      font-weight: 600;
       margin-bottom: 8px;
-      color: #1a1a1a;
+      color: var(--gray);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
     }
     
     label .optional {
-      color: #999;
+      color: var(--gray);
       font-weight: 400;
-      font-size: 11px;
+      font-size: 10px;
     }
     
     label .required {
-      color: #1a1a1a;
+      color: var(--red);
       font-size: 10px;
     }
     
     input, textarea {
       width: 100%;
-      background: #ffffff;
-      border: 1px solid #1a1a1a;
-      padding: 12px 14px;
-      color: #1a1a1a;
-      font-size: 13px;
+      background: var(--cream);
+      border: none;
+      border-bottom: 2px solid var(--black);
+      padding: 12px 0;
+      color: var(--black);
+      font-size: 14px;
       font-family: inherit;
     }
     
@@ -299,33 +306,31 @@
     }
     
     input::placeholder, textarea::placeholder {
-      color: #999;
+      color: var(--gray);
     }
     
     input:focus, textarea:focus {
       outline: none;
-      border-color: #1a1a1a;
-      border-width: 2px;
-      box-shadow: none;
+      border-bottom-color: var(--amber);
     }
     
     .helper {
       font-size: 11px;
-      color: #666;
+      color: var(--gray);
       margin-top: 6px;
       line-height: 1.5;
     }
     
     .helper strong {
-      color: #1a1a1a;
+      color: var(--black);
     }
     
     .halt-warning {
-      background: #fff;
-      border: 1px solid #1a1a1a;
+      background: var(--amber);
+      border: none;
       padding: 10px 12px;
       font-size: 11px;
-      color: #1a1a1a;
+      color: #5c4a1f;
       margin-top: 8px;
       display: none;
     }
@@ -336,33 +341,59 @@
     
     button {
       width: 100%;
-      background: #1a1a1a;
-      color: #ffffff;
-      border: 2px solid #1a1a1a;
-      padding: 14px;
+      background: var(--black);
+      color: var(--cream);
+      border: none;
+      padding: 16px;
       font-size: 11px;
       font-weight: 700;
       font-family: inherit;
       text-transform: uppercase;
       letter-spacing: 0.15em;
       cursor: pointer;
-      margin-top: 8px;
+      margin-top: 0;
+      transition: all 0.15s;
     }
     
     button:disabled {
-      opacity: 0.3;
+      opacity: 0.4;
       cursor: not-allowed;
+      background: var(--gray);
     }
     
     button:hover:not(:disabled) {
-      background: #fff;
-      color: #1a1a1a;
+      background: var(--red);
+      color: var(--cream);
+    }
+    
+    /* Back Button */
+    .back-btn {
+      background: transparent;
+      color: var(--gray);
+      border: 2px solid var(--gray);
+      padding: 10px 16px;
+      font-size: 10px;
+      margin-bottom: 20px;
+      width: auto;
+    }
+    
+    .back-btn:hover:not(:disabled) {
+      background: var(--black);
+      color: var(--cream);
+      border-color: var(--black);
     }
     
     /* Loading */
     .loading {
       text-align: center;
       padding: 80px 20px;
+    }
+    
+    .loading-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--black);
     }
     
     .loading-phases {
@@ -375,7 +406,7 @@
     
     .loading-phase {
       font-size: 11px;
-      color: #999;
+      color: var(--gray);
       padding: 6px 0;
       display: flex;
       align-items: center;
@@ -385,27 +416,27 @@
     }
     
     .loading-phase.active {
-      color: #475569;
+      color: var(--black);
     }
     
     .loading-phase.done {
-      color: #16a34a;
+      color: var(--blue);
     }
     
     .phase-dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: #e2e8f0;
+      background: var(--cream-dark);
     }
     
     .loading-phase.active .phase-dot {
-      background: #1a1a1a;
+      background: var(--amber);
       animation: pulse 1s infinite;
     }
     
     .loading-phase.done .phase-dot {
-      background: #16a34a;
+      background: var(--blue);
     }
     
     @keyframes pulse {
@@ -420,19 +451,18 @@
     
     .results-header h2 {
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 600;
       margin-bottom: 12px;
-      color: #475569;
+      color: var(--black);
     }
     
     .intake-summary {
-      font-size: 12px;
-      color: #64748b;
-      background: #ffffff;
-      border-radius:0;
-      padding: 14px;
+      font-size: 13px;
+      color: var(--gray);
+      background: var(--cream-dark);
+      padding: 16px;
       line-height: 1.8;
-      border: 1px solid #e2e8f0;
+      border: none;
     }
     
     .intake-row {
@@ -441,12 +471,12 @@
     }
     
     .intake-label {
-      color: #94a3b8;
+      color: var(--gray);
       min-width: 80px;
     }
     
     .intake-value {
-      color: #334155;
+      color: var(--black);
     }
     
     /* Selection Section */
@@ -457,54 +487,62 @@
     .selection-header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
+      align-items: baseline;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
     }
     
     .selection-header h2 {
-      font-size: 16px;
-      font-weight: 500;
-      color: #0f172a;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: 0.12em;
     }
     
     .selection-count {
-      font-size: 12px;
-      color: #64748b;
+      font-size: 11px;
+      color: var(--gray);
       padding: 4px 10px;
-      background: #f1f5f9;
-      border-radius:0;
+      background: var(--cream-dark);
     }
     
     .selection-count.full {
-      background: #fef3c7;
-      color: #d97706;
+      background: var(--amber);
+      color: #5c4a1f;
     }
     
     .selection-grid {
       display: grid;
-      gap: 12px;
+      gap: 3px;
+      background: var(--black);
+      padding: 3px;
     }
     
     .selection-card {
-      background: #ffffff;
-      border: 2px solid #e2e8f0;
-      border-radius:0;
-      padding: 16px;
+      background: var(--cream);
+      border: none;
+      padding: 20px;
       cursor: pointer;
       transition: all 0.15s;
     }
     
     .selection-card:hover {
-      border-color: #cbd5e1;
+      background: var(--cream-dark);
     }
     
     .selection-card.selected {
-      border-color: #1a1a1a;
-      background: #f5f5f5;
+      background: var(--black);
+    }
+    
+    .selection-card.selected .selection-card-source,
+    .selection-card.selected .selection-card-quote,
+    .selection-card.selected .selection-card-pattern {
+      color: var(--cream);
     }
     
     .selection-card.disabled {
-      opacity: 0.5;
+      opacity: 0.4;
       cursor: not-allowed;
     }
     
@@ -512,55 +550,56 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
     }
     
     .selection-card-source {
       font-size: 11px;
-      color: #64748b;
+      color: var(--gray);
+      letter-spacing: 0.03em;
     }
     
     .selection-card-tier {
       font-size: 9px;
-      padding: 2px 6px;
-      border-radius:0;
+      padding: 3px 8px;
       text-transform: uppercase;
-      font-weight: 500;
+      font-weight: 600;
+      letter-spacing: 0.05em;
     }
     
     .selection-card-tier.full {
-      background: rgba(22, 163, 74, 0.1);
-      color: #16a34a;
+      background: var(--blue);
+      color: var(--cream);
     }
     
     .selection-card-tier.limited {
-      background: rgba(217, 119, 6, 0.1);
-      color: #d97706;
+      background: var(--amber);
+      color: #5c4a1f;
     }
     
     .selection-card-tier.unplayable {
-      background: rgba(220, 38, 38, 0.1);
-      color: #dc2626;
+      background: var(--gray);
+      color: var(--cream);
     }
     
     .selection-card-quote {
-      font-size: 14px;
-      color: #0f172a;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--black);
       line-height: 1.5;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
     
     .selection-card-pattern {
-      font-size: 12px;
-      color: #64748b;
-      line-height: 1.5;
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.6;
     }
     
     .selection-checkbox {
-      width: 20px;
-      height: 20px;
-      border: 2px solid #cbd5e1;
-      border-radius:0;
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--gray);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -568,21 +607,27 @@
       color: transparent;
       font-size: 12px;
       font-weight: bold;
+      margin-left: 12px;
     }
     
     .selection-card.selected .selection-checkbox {
-      background: #1a1a1a;
-      border-color: #1a1a1a;
-      color: white;
+      background: var(--amber);
+      border-color: var(--amber);
+      color: var(--black);
     }
     
     .confirm-selection-btn {
       margin-top: 16px;
-      background: #1a1a1a;
+      background: var(--black);
     }
     
     .confirm-selection-btn:hover:not(:disabled) {
-      background: #2563eb;
+      background: var(--red);
+    }
+    
+    .confirm-selection-btn:disabled {
+      background: var(--gray);
+      opacity: 0.6;
     }
     
     /* Story Card */
@@ -950,16 +995,16 @@
     
     /* Reset */
     .reset-btn {
-      background: transparent;
-      border: 1px solid #e2e8f0;
-      color: #64748b;
-      margin-top: 24px;
+      background: var(--cream);
+      border: 2px solid var(--gray);
+      color: var(--gray);
+      margin-top: 12px;
     }
     
     .reset-btn:hover {
-      border-color: #cbd5e1;
-      color: #475569;
-      background: #f8fafc;
+      border-color: var(--black);
+      color: var(--black);
+      background: var(--cream-dark);
     }
     
     /* Kernel Section */
@@ -1846,111 +1891,668 @@
       font-weight: 600;
     }
     
-    /* Editing View */
+    /* ============================================
+       BAUHAUS EDITING VIEW
+       ============================================ */
+    :root {
+      --cream: #f5f0e6;
+      --cream-dark: #ebe5d9;
+      --bauhaus-black: #1a1a1a;
+      --red: #d64933;
+      --blue: #2d4a8c;
+      --amber: #d4a03c;
+      --gray: #8a8577;
+    }
+    
     .editing-view {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius:0;
+      background: var(--cream);
+      border: none;
       overflow: hidden;
+      font-family: 'DM Sans', system-ui, sans-serif;
     }
     
     .editing-header {
-      padding: 16px 20px;
-      background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
-      border-bottom: 1px solid #bae6fd;
+      padding: 20px;
+      background: var(--cream-dark);
+      border-bottom: none;
     }
     
     .editing-header-title {
       font-size: 14px;
       font-weight: 600;
-      color: #0c4a6e;
+      color: var(--bauhaus-black);
       margin-bottom: 4px;
+      letter-spacing: 0.02em;
     }
     
     .editing-header-subtitle {
       font-size: 12px;
-      color: #0369a1;
+      color: var(--gray);
     }
     
+    /* Section Label - Bauhaus architectural */
+    .section-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 20px;
+    }
+    
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--bauhaus-black);
+      opacity: 0.15;
+    }
+    
+    /* Structure Selector Grid */
+    .structure-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3px;
+      background: var(--bauhaus-black);
+      padding: 3px;
+      margin: 0 20px 16px;
+    }
+    
+    @media (min-width: 500px) {
+      .structure-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    .structure-card {
+      background: var(--cream);
+      padding: 20px 12px;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      border: none;
+      font-family: inherit;
+    }
+    
+    .structure-card:hover {
+      background: var(--cream-dark);
+    }
+    
+    .structure-card.active {
+      background: var(--bauhaus-black);
+    }
+    
+    /* Structure Icons */
+    .structure-icon {
+      width: 50px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .icon-three-act { gap: 4px; align-items: flex-end; }
+    .icon-three-act .col {
+      width: 12px;
+      background: var(--bauhaus-black);
+      transition: background 0.2s;
+    }
+    .icon-three-act .col:nth-child(1) { height: 16px; }
+    .icon-three-act .col:nth-child(2) { height: 36px; }
+    .icon-three-act .col:nth-child(3) { height: 24px; }
+    .structure-card.active .icon-three-act .col { background: var(--cream); }
+    
+    .icon-bento {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 3px;
+      width: 36px;
+      height: 36px;
+    }
+    .icon-bento .box { background: var(--bauhaus-black); transition: background 0.2s; }
+    .icon-bento .box:nth-child(3) { background: var(--amber); }
+    .structure-card.active .icon-bento .box { background: var(--cream); }
+    .structure-card.active .icon-bento .box:nth-child(3) { background: var(--amber); }
+    
+    .icon-journey { position: relative; }
+    .icon-journey .ring {
+      width: 36px; height: 36px;
+      border: 3px solid var(--bauhaus-black);
+      border-radius: 50%;
+      transition: border-color 0.2s;
+    }
+    .icon-journey .threshold {
+      position: absolute; top: -2px; left: 50%; transform: translateX(-50%);
+      width: 0; height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 8px solid var(--red);
+    }
+    .structure-card.active .icon-journey .ring { border-color: var(--cream); }
+    
+    .icon-circle { position: relative; width: 36px; height: 36px; }
+    .icon-circle .dot {
+      position: absolute;
+      width: 6px; height: 6px;
+      background: var(--bauhaus-black);
+      border-radius: 50%;
+      transition: background 0.2s;
+    }
+    .icon-circle .dot:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
+    .icon-circle .dot:nth-child(2) { top: 5px; right: 2px; }
+    .icon-circle .dot:nth-child(3) { top: 50%; right: 0; transform: translateY(-50%); }
+    .icon-circle .dot:nth-child(4) { bottom: 5px; right: 2px; }
+    .icon-circle .dot:nth-child(5) { bottom: 0; left: 50%; transform: translateX(-50%); background: var(--blue); }
+    .icon-circle .dot:nth-child(6) { bottom: 5px; left: 2px; }
+    .icon-circle .dot:nth-child(7) { top: 50%; left: 0; transform: translateY(-50%); }
+    .icon-circle .dot:nth-child(8) { top: 5px; left: 2px; }
+    .structure-card.active .icon-circle .dot { background: var(--cream); }
+    .structure-card.active .icon-circle .dot:nth-child(5) { background: var(--blue); }
+    
+    .icon-fichtean svg { width: 44px; height: 32px; }
+    .icon-fichtean .wave { fill: none; stroke: var(--bauhaus-black); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.2s; }
+    .icon-fichtean .peak { fill: var(--red); }
+    .structure-card.active .icon-fichtean .wave { stroke: var(--cream); }
+    
+    .icon-freytag svg { width: 40px; height: 36px; }
+    .icon-freytag .pyramid { fill: var(--bauhaus-black); transition: fill 0.2s; }
+    .icon-freytag .apex { fill: var(--red); }
+    .structure-card.active .icon-freytag .pyramid { fill: var(--cream); }
+    
+    .structure-name {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bauhaus-black);
+      transition: color 0.2s;
+      text-align: center;
+    }
+    .structure-card.active .structure-name { color: var(--cream); }
+    
+    /* Explanation Panel */
+    .explanation-panel {
+      background: var(--cream-dark);
+      padding: 20px;
+      display: none;
+      margin: 0 20px 20px;
+    }
+    .explanation-panel.visible { display: block; }
+    
+    .explanation-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    
+    .explanation-marker {
+      width: 28px; height: 28px;
+      background: var(--bauhaus-black);
+      color: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    
+    .explanation-title {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      margin-bottom: 6px;
+    }
+    
+    .explanation-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #4a4a45;
+    }
+    
+    .beats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 16px;
+    }
+    
+    .beat {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      background: var(--cream);
+    }
+    .beat.key { background: var(--amber); color: #5c4a1f; }
+    
+    .story-impact {
+      margin-top: 20px;
+      padding-left: 16px;
+      border-left: 4px solid var(--bauhaus-black);
+    }
+    
+    .story-impact-label {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 6px;
+    }
+    
+    .story-impact p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--bauhaus-black);
+    }
+    
+    .story-impact strong {
+      background: var(--amber);
+      padding: 0 3px;
+      font-weight: 600;
+    }
+    
+    /* Control Sections */
     .editing-family {
       padding: 16px 20px;
-      border-bottom: 1px solid #e2e8f0;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      background: var(--cream);
     }
     
-    .editing-family:last-child {
-      border-bottom: none;
-    }
+    .editing-family:last-of-type { border-bottom: none; }
     
     .editing-family-title {
-      font-size: 11px;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #64748b;
-      margin-bottom: 12px;
+      color: var(--gray);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .editing-family-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--bauhaus-black);
+      opacity: 0.1;
+    }
+    
+    .editing-family-number {
+      display: none;
+    }
+    
+    /* Control Row */
+    .control-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 6px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    
+    @media (min-width: 500px) {
+      .control-row {
+        grid-template-columns: 120px 1fr;
+        gap: 16px;
+        align-items: start;
+      }
+    }
+    
+    .control-row:last-child { border-bottom: none; }
+    
+    .control-label {
+      font-size: 10px;
       font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+    
+    @media (min-width: 500px) {
+      .control-label { padding-top: 10px; }
+    }
+    
+    .control-help {
+      font-size: 10px;
+      color: var(--gray);
+      margin-bottom: 6px;
+    }
+    
+    @media (min-width: 500px) {
+      .control-help { display: none; }
+    }
+    
+    /* Segmented Control - Bauhaus */
+    .segmented {
+      display: flex;
+      flex-wrap: wrap;
+      background: var(--bauhaus-black);
+      padding: 3px;
+      gap: 3px;
+    }
+    
+    .seg {
+      flex: 1 1 auto;
+      min-width: 50px;
+      padding: 9px 6px;
+      background: var(--cream);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      text-align: center;
+      color: var(--gray);
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      transition: all 0.15s;
+    }
+    
+    .seg:hover { background: var(--cream-dark); color: var(--bauhaus-black); }
+    .seg.active { background: var(--bauhaus-black); color: var(--cream); }
+    
+    /* Slider Track - Bauhaus */
+    .slider-track {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    
+    .slider-stop {
+      flex: 1 1 auto;
+      min-width: 60px;
+      padding: 9px 6px;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      text-align: center;
+      color: var(--gray);
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      font-family: inherit;
+      position: relative;
+      transition: color 0.15s;
+    }
+    
+    .slider-stop::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--cream-dark);
+      transition: background 0.15s;
+    }
+    
+    .slider-stop:hover { color: var(--bauhaus-black); }
+    .slider-stop.active { color: var(--bauhaus-black); font-weight: 600; }
+    .slider-stop.active::before { background: var(--bauhaus-black); }
+    
+    /* Card Grid - Bauhaus */
+    .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3px;
+      background: var(--bauhaus-black);
+      padding: 3px;
+    }
+    
+    .card-option {
+      flex: 1 1 calc(33% - 3px);
+      min-width: 55px;
+      padding: 12px 6px;
+      background: var(--cream);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      transition: background 0.15s;
+    }
+    
+    @media (min-width: 500px) {
+      .card-option { flex: 1; }
+    }
+    
+    .card-option:hover { background: var(--cream-dark); }
+    .card-option.active { background: var(--bauhaus-black); }
+    
+    .card-icon {
+      width: 24px; height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .card-shape { transition: all 0.15s; }
+    
+    .shape-square { width: 14px; height: 14px; background: var(--bauhaus-black); }
+    .card-option.active .shape-square { background: var(--cream); }
+    
+    .shape-bars {
+      width: 18px; height: 14px;
+      background: repeating-linear-gradient(to bottom, var(--bauhaus-black) 0px, var(--bauhaus-black) 3px, transparent 3px, transparent 5px);
+    }
+    .card-option.active .shape-bars {
+      background: repeating-linear-gradient(to bottom, var(--cream) 0px, var(--cream) 3px, transparent 3px, transparent 5px);
+    }
+    
+    .shape-triangle {
+      width: 0; height: 0;
+      border-left: 9px solid transparent;
+      border-right: 9px solid transparent;
+      border-bottom: 14px solid var(--bauhaus-black);
+    }
+    .card-option.active .shape-triangle { border-bottom-color: var(--amber); }
+    
+    .shape-circles { display: flex; gap: 3px; }
+    .shape-circles span { width: 9px; height: 9px; background: var(--bauhaus-black); border-radius: 50%; }
+    .card-option.active .shape-circles span { background: var(--cream); }
+    
+    .shape-scale {
+      width: 18px; height: 3px;
+      background: var(--bauhaus-black);
+      position: relative;
+    }
+    .shape-scale::before, .shape-scale::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      width: 5px; height: 5px;
+      background: var(--bauhaus-black);
+      border-radius: 50%;
+    }
+    .shape-scale::before { left: 0; }
+    .shape-scale::after { right: 0; }
+    .card-option.active .shape-scale,
+    .card-option.active .shape-scale::before,
+    .card-option.active .shape-scale::after { background: var(--cream); }
+    
+    .card-label {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--gray);
+      transition: color 0.15s;
+    }
+    .card-option.active .card-label { color: var(--cream); }
+    
+    /* Checkbox Group - Bauhaus */
+    .check-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    
+    .check-btn {
+      padding: 7px 10px;
+      background: transparent;
+      border: 2px dashed var(--gray);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--gray);
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s;
+    }
+    
+    .check-btn:hover { border-color: var(--bauhaus-black); color: var(--bauhaus-black); }
+    .check-btn.checked { background: var(--bauhaus-black); border: 2px solid var(--bauhaus-black); color: var(--cream); }
+    
+    /* Badge Group */
+    .badge-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    
+    .badge {
+      padding: 5px 10px;
+      background: var(--cream-dark);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+    .badge.suggested { background: var(--amber); color: #5c4a1f; }
+    
+    /* Generate Section - Bauhaus */
+    .generate-section {
+      background: var(--cream-dark);
+      padding: 20px;
+      margin: 20px;
+    }
+    
+    .generate-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    
+    .generate-title {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+    
+    .mode-toggle {
+      display: flex;
+      background: var(--bauhaus-black);
+      padding: 3px;
+      gap: 3px;
+    }
+    
+    .mode-btn {
+      padding: 6px 12px;
+      background: var(--cream);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray);
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      transition: all 0.15s;
+    }
+    
+    .mode-btn:hover { background: var(--cream-dark); color: var(--bauhaus-black); }
+    .mode-btn.active { background: var(--bauhaus-black); color: var(--cream); }
+    
+    .generate-btn {
+      width: 100%;
+      background: var(--bauhaus-black);
+      color: var(--cream);
+      border: none;
+      padding: 14px 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s;
+    }
+    
+    .generate-btn:hover { background: var(--red); }
+    
+    .generate-hint {
+      font-size: 11px;
+      color: var(--gray);
+      margin-top: 10px;
+      text-align: center;
+    }
+    
+    .changes-pending {
+      background: var(--amber);
+      color: #5c4a1f;
+      padding: 8px 12px;
+      font-size: 11px;
+      margin-bottom: 12px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
     
-    .editing-family-number {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: #e2e8f0;
-      color: #64748b;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      font-weight: 600;
+    .generated-story {
+      margin-top: 20px;
+      background: var(--cream);
+      padding: 20px;
     }
     
-    .editing-controls-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
+    .generated-story-header {
+      margin-bottom: 12px;
+    }
+    
+    .generated-story-label {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+    
+    .generated-story-content {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--bauhaus-black);
+    }
+    
+    /* Legacy dropdown support (hidden but functional) */
+    .editing-select {
+      display: none;
     }
     
     .editing-control {
-      background: #f8fafc;
-      border-radius:0;
-      padding: 12px;
+      display: none;
     }
     
-    .editing-control.full {
-      grid-column: 1 / -1;
-    }
-    
-    .editing-control-label {
-      font-size: 10px;
-      color: #64748b;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      margin-bottom: 6px;
-    }
-    
-    .editing-select {
-      width: 100%;
-      background: white;
-      border: 1px solid #e2e8f0;
-      border-radius:0;
-      padding: 10px 12px;
-      color: #0f172a;
-      font-size: 13px;
-      font-family: inherit;
-      cursor: pointer;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 10px center;
-      padding-right: 32px;
-    }
-    
-    .editing-select:focus {
-      outline: none;
-      border-color: #1a1a1a;
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    .editing-controls-grid {
+      display: none;
     }
     
     /* Landing Page */
@@ -1962,54 +2564,54 @@
     .landing-hero h1 {
       font-size: 24px;
       font-weight: 700;
-      color: #1a1a1a;
+      color: var(--black);
       line-height: 1.3;
       margin-bottom: 16px;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.1em;
     }
     
     .landing-subtitle {
-      font-size: 12px;
-      color: #666;
+      font-size: 14px;
+      color: var(--gray);
       max-width: 400px;
       margin: 0 auto;
       line-height: 1.6;
     }
     
     .landing-problem, .landing-solution {
-      background: #ffffff;
-      border: 1px solid #1a1a1a;
-      padding: 20px 24px;
-      margin-bottom: 12px;
+      background: var(--cream-dark);
+      border: none;
+      padding: 24px;
+      margin-bottom: 3px;
     }
     
     .landing-problem {
-      border-left: 4px solid #1a1a1a;
+      border-left: 4px solid var(--red);
     }
     
     .landing-solution {
-      border-left: 4px solid #1a1a1a;
+      border-left: 4px solid var(--blue);
     }
     
     .landing-problem-title, .landing-solution-title {
       font-size: 10px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: #1a1a1a;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--gray);
       letter-spacing: 0.15em;
     }
     
     .landing-problem p, .landing-solution p {
-      font-size: 13px;
-      color: #666;
-      line-height: 1.6;
+      font-size: 14px;
+      color: var(--black);
+      line-height: 1.7;
       margin: 0;
     }
     
     .landing-how {
-      background: #ffffff;
-      border: 1px solid #1a1a1a;
+      background: var(--cream-dark);
+      border: none;
       padding: 24px;
       margin: 24px 0;
     }
@@ -2018,8 +2620,8 @@
       display: flex;
       gap: 16px;
       align-items: flex-start;
-      padding: 12px 0;
-      border-bottom: 1px solid #ddd;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
     }
     
     .landing-step:last-child {
@@ -2032,57 +2634,57 @@
     }
     
     .step-number {
-      width: 24px;
-      height: 24px;
-      background: #1a1a1a;
-      color: white;
+      width: 28px;
+      height: 28px;
+      background: var(--black);
+      color: var(--cream);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      font-size: 11px;
+      font-size: 12px;
       flex-shrink: 0;
     }
     
     .step-content strong {
       display: block;
-      color: #1a1a1a;
+      color: var(--black);
       font-size: 12px;
-      margin-bottom: 2px;
-      font-weight: 700;
+      margin-bottom: 4px;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
     }
     
     .step-content span {
-      color: #666;
-      font-size: 11px;
+      color: var(--gray);
+      font-size: 13px;
     }
     
     .landing-cta {
       width: 100%;
-      background: #1a1a1a;
-      color: white;
-      border: 2px solid #1a1a1a;
-      padding: 16px 24px;
-      font-size: 11px;
+      background: var(--black);
+      color: var(--cream);
+      border: none;
+      padding: 18px 24px;
+      font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.2em;
       cursor: pointer;
       margin: 24px 0 16px;
-      transition: all 0.1s;
+      transition: all 0.15s;
       font-family: inherit;
     }
     
     .landing-cta:hover {
-      background: #fff;
-      color: #1a1a1a;
+      background: var(--red);
+      color: var(--cream);
     }
     
     .landing-footer {
       text-align: center;
-      font-size: 10px;
-      color: #999;
+      font-size: 11px;
+      color: var(--gray);
       padding-bottom: 40px;
       letter-spacing: 0.05em;
     }
@@ -2095,23 +2697,23 @@
     .intake-header h2 {
       font-size: 14px;
       font-weight: 700;
-      color: #1a1a1a;
+      color: var(--black);
       margin: 16px 0 8px;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
     }
     
     .intake-subtitle {
-      font-size: 12px;
-      color: #666;
+      font-size: 13px;
+      color: var(--gray);
     }
     
     .back-btn {
       background: none;
-      border: 1px solid #1a1a1a;
-      padding: 8px 14px;
+      border: 2px solid var(--gray);
+      padding: 10px 16px;
       font-size: 10px;
-      color: #1a1a1a;
+      color: var(--gray);
       cursor: pointer;
       width: auto;
       margin: 0;
@@ -2127,16 +2729,16 @@
     
     /* Selection subtitle */
     .selection-subtitle {
-      font-size: 11px;
-      color: #666;
-      margin: 8px 0 16px;
+      font-size: 12px;
+      color: var(--gray);
+      margin: 0;
     }
     
     /* Loading title */
     .loading-title {
       font-size: 12px;
       font-weight: 700;
-      color: #1a1a1a;
+      color: var(--black);
       margin-bottom: 24px;
       text-align: center;
       text-transform: uppercase;
@@ -3018,6 +3620,16 @@ const haltWarning = document.getElementById('haltWarning');
 
 const requiredInputs = [brandInput, audienceInput, truthInput, emotionInput];
 
+// Debug: Log form elements
+console.log('Form elements loaded:', {
+  form: !!form,
+  brand: !!brandInput,
+  audience: !!audienceInput,
+  truth: !!truthInput,
+  emotion: !!emotionInput,
+  submitBtn: !!submitBtn
+});
+
 requiredInputs.forEach(input => {
   if (input) {
     input.addEventListener('input', validateForm);
@@ -3035,17 +3647,41 @@ if (truthInput) {
 
 function validateForm() {
   const allFilled = requiredInputs.every(input => input && input.value.trim().length > 0);
-  const truthValid = truthInput && truthInput.value.trim().length >= 10;
+  const truthVal = truthInput ? truthInput.value.trim() : '';
+  const truthValid = truthVal.length >= 10;
   const isValid = allFilled && truthValid;
+  
+  console.log('Validation:', { allFilled, truthValid, truthLength: truthVal.length, isValid });
   
   if (submitBtn) {
     submitBtn.disabled = !isValid;
-    submitBtn.textContent = isValid ? 'SEARCH' : 'Complete all fields';
+    if (!allFilled) {
+      submitBtn.textContent = 'Fill all required fields';
+      submitBtn.style.background = 'var(--gray)';
+    } else if (!truthValid) {
+      submitBtn.textContent = `Belief needs ${10 - truthVal.length} more chars`;
+      submitBtn.style.background = 'var(--gray)';
+    } else {
+      submitBtn.textContent = 'SEARCH';
+      submitBtn.style.background = 'var(--black)';
+      console.log('*** BUTTON ENABLED ***');
+    }
   }
 }
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
+// Run initial validation
+console.log('Running initial validation...');
+validateForm();
+
+// Main form submission logic (extracted so it can be called from multiple places)
+async function handleFormSubmit() {
+  console.log('=== FORM SUBMIT TRIGGERED ===');
+  
+  // Validate before proceeding
+  if (submitBtn.disabled) {
+    console.log('Button is disabled, cannot submit');
+    return;
+  }
   
   const intake = {
     brand: brandInput.value.trim(),
@@ -3054,6 +3690,8 @@ form.addEventListener('submit', async (e) => {
     truth_to_prove: truthInput.value.trim(),
     desired_emotional_destination: emotionInput.value.trim()
   };
+  
+  console.log('Intake data:', intake);
   
   // Set global truth for constraint checking
   globalTruth = intake.truth_to_prove;
@@ -3075,7 +3713,27 @@ form.addEventListener('submit', async (e) => {
     document.getElementById('intakeSection').classList.remove('hidden');
     alert('Diagnostic failed: ' + err.message);
   }
-});
+}
+
+// Attach form submit handler
+if (form) {
+  console.log('Form found, attaching submit handler');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    handleFormSubmit();
+  });
+}
+
+// Also add direct click handler on button as backup
+if (submitBtn) {
+  submitBtn.addEventListener('click', (e) => {
+    console.log('Button clicked directly!');
+    if (!submitBtn.disabled) {
+      e.preventDefault();
+      handleFormSubmit();
+    }
+  });
+}
 
 function animatePhases() {
   const phases = ['phase2', 'phase3', 'phase4', 'phase5', 'phase6', 'phase7'];
@@ -3096,8 +3754,8 @@ function animatePhases() {
 // ============================================================================
 // API CONFIGURATION
 // ============================================================================
-// When deploying with a backend proxy, set this to your Worker/API endpoint:
-// const API_URL = 'https://your-worker.your-subdomain.workers.dev/api/diagnostic';
+// Set to null/empty to use STUB MODE (sample data for testing)
+// Set to your Worker URL for production: 'https://storybox-proxy.milochao.workers.dev/api/diagnostic'
 const API_URL = 'https://storybox-proxy.milochao.workers.dev/api/diagnostic';
 
 async function runDiagnostic(intake) {
@@ -3434,6 +4092,10 @@ function renderSelectionCard(s, idx) {
   const storyId = s.story_id || `story_${idx}`;
   const tier = assess.playability_tier || 'UNPLAYABLE';
   
+  // Interpolate pattern statement with actual truth value
+  let pattern = s.pattern_statement || s.pattern || 'No pattern extracted.';
+  pattern = pattern.replace(/\$\{intake\.truth_to_prove\}/g, currentIntake?.truth_to_prove || '[truth]');
+  
   return `
     <div class="selection-card" data-story-id="${esc(storyId)}" onclick="toggleStorySelection('${esc(storyId)}')">
       <div class="selection-card-header">
@@ -3442,11 +4104,11 @@ function renderSelectionCard(s, idx) {
         </div>
         <div style="display:flex;gap:8px;align-items:center;">
           <span class="selection-card-tier ${tier.toLowerCase()}">${tier}</span>
-          <div class="selection-checkbox">+</div>
+          <div class="selection-checkbox">✓</div>
         </div>
       </div>
       <div class="selection-card-quote">"${esc(raw.key_quote || '')}"</div>
-      <div class="selection-card-pattern">${esc(s.pattern_statement || s.pattern || 'No pattern extracted.')}</div>
+      <div class="selection-card-pattern">${esc(pattern)}</div>
     </div>
   `;
 }
@@ -3722,6 +4384,9 @@ function renderEditingView(s, storyId) {
   const playability = computeKernelScore(kernel);
   const raw = s.raw_content || {};
   
+  // Get current structure selection (default to 'three-act')
+  const currentStructure = stack.selected_structure || 'three-act';
+  
   return `
     <div class="editing-view">
       <!-- Header -->
@@ -3730,88 +4395,354 @@ function renderEditingView(s, storyId) {
         <div class="editing-header-subtitle">Same facts. Different telling. Play.</div>
       </div>
       
-      <!-- Section 1: Story Shape -->
+      <!-- Structure Selector -->
+      <div class="section-label">Story Structure</div>
+      <div class="structure-grid" data-story-id="${esc(storyId)}">
+        <button class="structure-card ${currentStructure === 'three-act' ? 'active' : ''}" data-structure="three-act" onclick="selectStructure('${esc(storyId)}', 'three-act', this)">
+          <div class="structure-icon icon-three-act">
+            <div class="col"></div><div class="col"></div><div class="col"></div>
+          </div>
+          <div class="structure-name">Three-Act</div>
+        </button>
+        <button class="structure-card ${currentStructure === 'kishotenketsu' ? 'active' : ''}" data-structure="kishotenketsu" onclick="selectStructure('${esc(storyId)}', 'kishotenketsu', this)">
+          <div class="structure-icon icon-bento">
+            <div class="box"></div><div class="box"></div><div class="box"></div><div class="box"></div>
+          </div>
+          <div class="structure-name">Kishōtenketsu</div>
+        </button>
+        <button class="structure-card ${currentStructure === 'journey' ? 'active' : ''}" data-structure="journey" onclick="selectStructure('${esc(storyId)}', 'journey', this)">
+          <div class="structure-icon icon-journey">
+            <div class="ring"></div><div class="threshold"></div>
+          </div>
+          <div class="structure-name">Hero's Journey</div>
+        </button>
+        <button class="structure-card ${currentStructure === 'circle' ? 'active' : ''}" data-structure="circle" onclick="selectStructure('${esc(storyId)}', 'circle', this)">
+          <div class="structure-icon icon-circle">
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          </div>
+          <div class="structure-name">Story Circle</div>
+        </button>
+        <button class="structure-card ${currentStructure === 'fichtean' ? 'active' : ''}" data-structure="fichtean" onclick="selectStructure('${esc(storyId)}', 'fichtean', this)">
+          <div class="structure-icon icon-fichtean">
+            <svg viewBox="0 0 44 32"><polyline class="wave" points="4,28 12,22 16,26 26,14 32,18 40,6"/><circle class="peak" cx="40" cy="6" r="3"/></svg>
+          </div>
+          <div class="structure-name">Rising Crises</div>
+        </button>
+        <button class="structure-card ${currentStructure === 'freytag' ? 'active' : ''}" data-structure="freytag" onclick="selectStructure('${esc(storyId)}', 'freytag', this)">
+          <div class="structure-icon icon-freytag">
+            <svg viewBox="0 0 40 36"><polygon class="pyramid" points="20,4 38,32 2,32"/><circle class="apex" cx="20" cy="7" r="3"/></svg>
+          </div>
+          <div class="structure-name">Pyramid</div>
+        </button>
+      </div>
+      
+      <!-- Structure Explanations -->
+      ${renderStructureExplanations(storyId, currentStructure, raw)}
+      
+      <!-- How It's Organized -->
       <div class="editing-family">
-        <div class="editing-family-title">
-          <span class="editing-family-number">/01</span>
-          STRUCTURE
+        <div class="editing-family-title">How It's Organized</div>
+        
+        <div class="control-row">
+          <div class="control-label">Event Order</div>
+          <div>
+            <div class="control-help">How events are arranged</div>
+            ${renderSegmented(storyId, 'family_1_identity', 'event_sequencing_structure', stack, [
+              {value: 'ESCALATION', label: 'Building'},
+              {value: 'TURN_CONTRAST', label: 'Before/After'},
+              {value: 'EPISODIC', label: 'Episodes'},
+              {value: 'MOSAIC', label: 'Mosaic'},
+              {value: 'CIRCULAR', label: 'Circular'}
+            ])}
+          </div>
         </div>
-        <div class="editing-controls-grid">
-          ${renderEditingDropdown(storyId, 'family_1_identity', 'event_sequencing_structure', 'Flow', stack, playability.tier, kernel)}
-          ${renderEditingDropdown(storyId, 'family_1_identity', 'change_logic', 'Arc', stack, playability.tier, kernel)}
-          ${renderEditingDropdown(storyId, 'family_1_identity', 'resolution_state', 'Ending', stack, playability.tier, kernel)}
+        
+        <div class="control-row">
+          <div class="control-label">Pacing</div>
+          <div>
+            <div class="control-help">How quickly it moves</div>
+            ${renderSlider(storyId, 'family_4_expression', 'pacing_profile', stack, [
+              {value: 'COMPRESSED', label: 'Tight'},
+              {value: 'EVEN', label: 'Steady'},
+              {value: 'EXPANSIVE', label: 'Spacious'},
+              {value: 'TURN_WEIGHTED', label: 'Weighted'}
+            ])}
+          </div>
         </div>
       </div>
       
-      <!-- Section 2: Point of View -->
+      <!-- Who's Telling It -->
       <div class="editing-family">
-        <div class="editing-family-title">
-          <span class="editing-family-number">/02</span>
-          PERSPECTIVE
+        <div class="editing-family-title">Who's Telling It</div>
+        
+        <div class="control-row">
+          <div class="control-label">Speaker</div>
+          <div>
+            <div class="control-help">Whose point of view</div>
+            ${renderSegmented(storyId, 'family_2_experience', 'pov_anchor', stack, [
+              {value: 'PRIMARY_ACTOR', label: 'Main Character'},
+              {value: 'WITNESS', label: 'Witness'},
+              {value: 'COLLECTIVE', label: 'Group ("we")'}
+            ])}
+          </div>
         </div>
-        <div class="editing-controls-grid">
-          ${renderEditingDropdown(storyId, 'family_2_experience', 'pov_grammatical_mode', 'Voice', stack, playability.tier, kernel)}
-          ${renderEditingDropdown(storyId, 'family_2_experience', 'pov_anchor', 'Narrator', stack, playability.tier, kernel)}
-          ${renderEditingDropdown(storyId, 'family_2_experience', 'temporal_frame', 'Tense', stack, playability.tier, kernel)}
-          ${renderEditingDropdown(storyId, 'family_2_experience', 'narrative_distance', 'Distance', stack, playability.tier, kernel)}
+        
+        <div class="control-row">
+          <div class="control-label">Voice</div>
+          <div>
+            <div class="control-help">"I" vs "he/she" vs camera</div>
+            ${renderSegmented(storyId, 'family_2_experience', 'pov_grammatical_mode', stack, [
+              {value: 'FIRST_PERSON', label: 'I / Me'},
+              {value: 'THIRD_LIMITED', label: 'He / She'},
+              {value: 'THIRD_OMNISCIENT', label: 'All-knowing'},
+              {value: 'OBJECTIVE', label: 'Camera'}
+            ])}
+          </div>
+        </div>
+        
+        <div class="control-row">
+          <div class="control-label">Looking Back</div>
+          <div>
+            <div class="control-help">How much hindsight</div>
+            ${renderSlider(storyId, 'family_2_experience', 'narrative_distance', stack, [
+              {value: 'INTIMATE', label: 'In the moment'},
+              {value: 'CLOSE', label: 'Days later'},
+              {value: 'DISTANT', label: 'Years later'},
+              {value: 'MYTHIC', label: 'Legend'}
+            ])}
+          </div>
         </div>
       </div>
       
-      <!-- Section 3: Tension -->
+      <!-- What's At Stake -->
       <div class="editing-family">
-        <div class="editing-family-title">
-          <span class="editing-family-number">/03</span>
-          CONFLICT
+        <div class="editing-family-title">What's At Stake</div>
+        
+        <div class="control-row">
+          <div class="control-label">Stakes</div>
+          <div>
+            <div class="control-help">What could be lost</div>
+            ${renderCards(storyId, 'family_3_pressure', 'stakes_domain', stack, [
+              {value: 'PHYSICAL', label: 'Body', shape: 'square'},
+              {value: 'RESOURCE', label: 'Money', shape: 'bars'},
+              {value: 'STATUS', label: 'Standing', shape: 'triangle'},
+              {value: 'RELATIONSHIP', label: 'Bond', shape: 'circles'},
+              {value: 'MORAL', label: 'Right/Wrong', shape: 'scale'}
+            ])}
+          </div>
         </div>
-        <div class="editing-controls-grid">
-          ${renderEditingDropdown(storyId, 'family_3_pressure', 'antagonistic_force_type', 'Enemy', stack, playability.tier, kernel)}
-          ${renderEditingDropdown(storyId, 'family_3_pressure', 'conflict_expression_mode', 'Battle', stack, playability.tier, kernel)}
-          ${renderEditingDropdown(storyId, 'family_3_pressure', 'stakes_domain', 'Stakes', stack, playability.tier, kernel)}
-          ${renderEditingDropdown(storyId, 'family_3_pressure', 'urgency_clock', 'Clock', stack, playability.tier, kernel)}
+        
+        <div class="control-row">
+          <div class="control-label">Time Pressure</div>
+          <div>
+            <div class="control-help">How urgent it feels</div>
+            ${renderSlider(storyId, 'family_3_pressure', 'urgency_clock', stack, [
+              {value: 'NONE', label: 'None'},
+              {value: 'SOFT', label: 'Slow burn'},
+              {value: 'HARD', label: 'Building'},
+              {value: 'ESCALATING', label: 'Ticking'}
+            ])}
+          </div>
         </div>
       </div>
       
-      <!-- Section 4: Feel -->
+      <!-- Tone & Feel -->
       <div class="editing-family">
-        <div class="editing-family-title">
-          <span class="editing-family-number">/04</span>
-          TEXTURE
+        <div class="editing-family-title">Tone & Feel</div>
+        
+        <div class="control-row">
+          <div class="control-label">Genre Feel</div>
+          <div>
+            <div class="control-help">The emotional flavor</div>
+            ${renderCards(storyId, 'family_4_expression', 'narrative_mode', stack, [
+              {value: 'OBSERVATIONAL', label: 'Straight', shape: 'square'},
+              {value: 'COMEDY', label: 'Funny', shape: 'bars'},
+              {value: 'ROMANCE', label: 'Warm', shape: 'triangle'},
+              {value: 'TRAGEDY', label: 'Heavy', shape: 'circles'},
+              {value: 'SATIRE', label: 'Ironic', shape: 'scale'}
+            ])}
+          </div>
         </div>
-        <div class="editing-controls-grid">
-          ${renderEditingDropdown(storyId, 'family_4_expression', 'narrative_mode', 'Genre', stack, playability.tier, kernel)}
-          ${renderEditingDropdown(storyId, 'family_4_expression', 'verisimilitude', 'Reality', stack, playability.tier, kernel)}
-          ${renderEditingDropdown(storyId, 'family_4_expression', 'metaphoricity', 'Literal/Abstract', stack, playability.tier, kernel)}
-          ${renderEditingDropdown(storyId, 'family_4_expression', 'tonal_register', 'Mood', stack, playability.tier, kernel)}
-          ${renderEditingDropdown(storyId, 'family_4_expression', 'pacing_profile', 'Pace', stack, playability.tier, kernel)}
+        
+        <div class="control-row">
+          <div class="control-label">Reality Level</div>
+          <div>
+            <div class="control-help">How grounded</div>
+            ${renderSegmented(storyId, 'family_4_expression', 'verisimilitude', stack, [
+              {value: 'REALISTIC', label: 'Grounded'},
+              {value: 'SPECULATIVE', label: 'Heightened'},
+              {value: 'ABSURD', label: 'Stylized'}
+            ])}
+          </div>
         </div>
       </div>
       
       <!-- Generate Section -->
       <div class="generate-section" data-story-generate="${esc(storyId)}">
         <div class="generate-header">
-          <span class="generate-title">OUTPUT</span>
+          <span class="generate-title">Output</span>
           <div class="mode-toggle">
             <button class="mode-btn active" onclick="setGenerateMode('${esc(storyId)}', 'ai')">AI</button>
-            <button class="mode-btn" onclick="setGenerateMode('${esc(storyId)}', 'manual')">PREVIEW</button>
+            <button class="mode-btn" onclick="setGenerateMode('${esc(storyId)}', 'manual')">Preview</button>
           </div>
         </div>
         <div class="changes-pending" style="display:none;" data-changes-pending="${esc(storyId)}">
-          <span class="changes-pending-icon">&bull;</span>
+          <span class="changes-pending-icon">•</span>
           <span>Changes pending. Generate to apply.</span>
         </div>
         <button class="generate-btn" onclick="generateStory('${esc(storyId)}')" data-generate-btn="${esc(storyId)}">
           <span>GENERATE</span>
         </button>
-        <div class="generate-hint">Same events. New voice. Facts locked. Style unlocked.</div>
+        <div class="generate-hint">Same events. New voice. Facts locked.</div>
         <div class="generated-story" style="display:none;" data-generated-output="${esc(storyId)}">
           <div class="generated-story-header">
-            <span class="generated-story-label">RESULT</span>
+            <span class="generated-story-label">Result</span>
           </div>
           <div class="generated-story-content" data-generated-content="${esc(storyId)}"></div>
         </div>
       </div>
     </div>
   `;
+}
+
+// Render structure explanation panels
+function renderStructureExplanations(storyId, currentStructure, raw) {
+  const quote = (raw.key_quote || '').substring(0, 40);
+  
+  const explanations = {
+    'three-act': {
+      title: 'When to use Three-Act',
+      desc: 'The default shape. Use when there\'s clear rising tension → peak → resolution.',
+      beats: [{label:'Setup'}, {label:'Conflict', key:true}, {label:'Resolution'}],
+      impact: 'Act I: setup. Act II: the <strong>confrontation</strong>. Act III: resolution.'
+    },
+    'kishotenketsu': {
+      title: 'When to use Kishōtenketsu',
+      desc: 'Best when insight comes from a perspective shift, not conflict.',
+      beats: [{label:'Ki — Setup'}, {label:'Shō — Develop'}, {label:'Ten — Twist', key:true}, {label:'Ketsu — Resolve'}],
+      impact: 'Show behavior as neutral fact. The <strong>twist</strong> reframes everything.'
+    },
+    'journey': {
+      title: 'When to use Hero\'s Journey',
+      desc: 'Use when someone goes through transformation via trials. 12 stages.',
+      beats: [{label:'Ordinary World'}, {label:'Call'}, {label:'Threshold', key:true}, {label:'Trials'}, {label:'Ordeal', key:true}, {label:'Reward'}, {label:'Return'}],
+      impact: 'The <strong>ordeal</strong> is the moment everything seems impossible.'
+    },
+    'circle': {
+      title: 'When to use Story Circle',
+      desc: '8 beats in a loop. Tighter and more rhythmic.',
+      beats: [{label:'You'}, {label:'Need'}, {label:'Go'}, {label:'Search'}, {label:'Find', key:true}, {label:'Take'}, {label:'Return'}, {label:'Change'}],
+      impact: 'Compact beats with clear <strong>find</strong> moment.'
+    },
+    'fichtean': {
+      title: 'When to use Rising Crises',
+      desc: 'Start in the middle of action. No setup—immediate tension.',
+      beats: [{label:'Drop In'}, {label:'Crisis 1'}, {label:'Crisis 2'}, {label:'Peak', key:true}, {label:'Resolve'}],
+      impact: 'Opens with impact. Each crisis escalates to <strong>peak</strong>.'
+    },
+    'freytag': {
+      title: 'When to use Pyramid',
+      desc: 'Classic five-part shape. Peak sits exactly in the middle.',
+      beats: [{label:'Intro'}, {label:'Rising'}, {label:'Peak', key:true}, {label:'Falling'}, {label:'End'}],
+      impact: 'Symmetrical rise and fall with central <strong>peak</strong>.'
+    }
+  };
+  
+  return Object.entries(explanations).map(([key, exp]) => `
+    <div class="explanation-panel ${currentStructure === key ? 'visible' : ''}" id="explain-${key}-${esc(storyId)}">
+      <div class="explanation-header">
+        <div class="explanation-marker">?</div>
+        <div>
+          <div class="explanation-title">${exp.title}</div>
+          <p class="explanation-desc">${exp.desc}</p>
+        </div>
+      </div>
+      <div class="beats">
+        ${exp.beats.map(b => `<span class="beat ${b.key ? 'key' : ''}">${b.label}</span>`).join('')}
+      </div>
+      <div class="story-impact">
+        <div class="story-impact-label">How this shapes the story</div>
+        <p>${exp.impact}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Render segmented control
+function renderSegmented(storyId, family, field, stack, options) {
+  const currentValue = stack?.[family]?.[field] || options[0].value;
+  return `
+    <div class="segmented">
+      ${options.map(opt => `
+        <button class="seg ${currentValue === opt.value ? 'active' : ''}" 
+                onclick="handleControlChange('${esc(storyId)}', '${family}', '${field}', '${opt.value}', this)">${opt.label}</button>
+      `).join('')}
+    </div>
+  `;
+}
+
+// Render slider control
+function renderSlider(storyId, family, field, stack, options) {
+  const currentValue = stack?.[family]?.[field] || options[0].value;
+  return `
+    <div class="slider-track">
+      ${options.map(opt => `
+        <button class="slider-stop ${currentValue === opt.value ? 'active' : ''}"
+                onclick="handleControlChange('${esc(storyId)}', '${family}', '${field}', '${opt.value}', this)">${opt.label}</button>
+      `).join('')}
+    </div>
+  `;
+}
+
+// Render card selector
+function renderCards(storyId, family, field, stack, options) {
+  const currentValue = stack?.[family]?.[field] || options[0].value;
+  const shapeHtml = {
+    'square': '<div class="card-shape shape-square"></div>',
+    'bars': '<div class="card-shape shape-bars"></div>',
+    'triangle': '<div class="card-shape shape-triangle"></div>',
+    'circles': '<div class="card-shape shape-circles"><span></span><span></span></div>',
+    'scale': '<div class="card-shape shape-scale"></div>'
+  };
+  return `
+    <div class="card-grid">
+      ${options.map(opt => `
+        <button class="card-option ${currentValue === opt.value ? 'active' : ''}"
+                onclick="handleControlChange('${esc(storyId)}', '${family}', '${field}', '${opt.value}', this)">
+          <div class="card-icon">${shapeHtml[opt.shape] || shapeHtml.square}</div>
+          <div class="card-label">${opt.label}</div>
+        </button>
+      `).join('')}
+    </div>
+  `;
+}
+
+// Handle Bauhaus control changes - bridges to existing handleDropdownChange
+function handleControlChange(storyId, family, field, value, element) {
+  // Update UI - deactivate siblings, activate this
+  const parent = element.parentElement;
+  parent.querySelectorAll('.seg, .slider-stop, .card-option').forEach(el => el.classList.remove('active'));
+  element.classList.add('active');
+  
+  // Call existing dropdown handler for data flow
+  handleDropdownChange(storyId, family, field, value);
+}
+
+// Handle structure selection
+function selectStructure(storyId, structure, element) {
+  // Update UI
+  const grid = element.parentElement;
+  grid.querySelectorAll('.structure-card').forEach(c => c.classList.remove('active'));
+  element.classList.add('active');
+  
+  // Update explanation panels
+  document.querySelectorAll(`[id^="explain-"][id$="-${storyId}"]`).forEach(p => p.classList.remove('visible'));
+  const panel = document.getElementById(`explain-${structure}-${storyId}`);
+  if (panel) panel.classList.add('visible');
+  
+  // Store structure selection (optional - for now just visual)
+  // Could add to stack: handleDropdownChange(storyId, 'structure', 'selected', structure);
 }
 
 function renderEditingDropdown(storyId, family, field, label, stack, tier, kernel) {
